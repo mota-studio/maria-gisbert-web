@@ -1,0 +1,127 @@
+
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+---
+
+<BaseLayout title="Sobre mí">
+  <main class="about-page">
+
+    <article class="about-content">
+      <h1>Sobre mí</h1>
+
+      <img
+        src="/images/about/maria.jpg"
+        alt="María Gisbert"
+        class="about-photo"
+      />
+
+      <div class="about-description">
+        <p>
+          María Gisbert – Arquitecta por la Universidad de Alicante.
+        </p>
+
+        <p>
+          Ofrecemos servicios de Infografías, Arquitectura,
+          y diseño en general, gráfico, de mobiliario...
+        </p>
+
+        <p>
+          – <strong>dibujo/ diseño</strong>
+          (Autocad, Rhinoceros, Revit (BIM),
+          3D Studio, Photoshop...),
+        </p>
+
+        <p>
+          – <strong>edición de vídeo</strong>
+          (Premiere, Pinnacle),
+        </p>
+
+        <p>
+          – <strong>mediciones y presupuestos</strong>
+          (Presto),
+        </p>
+
+        <p>– ofimática...</p>
+      </div>
+    </article>
+
+    <aside class="about-sidebar">
+
+      <section class="sidebar-section">
+        <form class="sidebar-search" role="search">
+          <input type="search" aria-label="Buscar" />
+          <button type="submit">Buscar</button>
+        </form>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Entradas recientes</h2>
+        <ul>
+          <li>HABITAR COACV 2016</li>
+          <li>VI PORCELANOSA</li>
+          <li>I MATIMEX</li>
+          <li>TRANS-HITOS 2017</li>
+          <li>DENTALART</li>
+        </ul>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Comentarios recientes</h2>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Archivos</h2>
+        <ul>
+          <li>noviembre 2017</li>
+          <li>febrero 2014</li>
+          <li>diciembre 2013</li>
+          <li>noviembre 2013</li>
+          <li>octubre 2013</li>
+          <li>septiembre 2013</li>
+          <li>julio 2013</li>
+          <li>junio 2013</li>
+          <li>mayo 2013</li>
+          <li>marzo 2013</li>
+        </ul>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Categorías</h2>
+        <ul>
+          <li>Arquitectura</li>
+          <li>Diseño Gráfico</li>
+          <li>Infografías</li>
+          <li>Mobiliario</li>
+        </ul>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Meta</h2>
+        <ul>
+          <li>Acceder</li>
+          <li>Feed de entradas</li>
+          <li>Feed de comentarios</li>
+          <li>WordPress.org</li>
+        </ul>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>idioma</h2>
+        <ul>
+          <li>🇪🇸 Español</li>
+          <li>🇬🇧 English</li>
+          <li>🇫🇷 Français</li>
+          <li>🇪🇸 Català</li>
+        </ul>
+      </section>
+
+    </aside>
+
+  </main>
+
+  <footer class="site-footer">
+    © 2012 Grid Theme Responsive Free Wordpress Theme.
+    All Rights Reserved.
+  </footer>
+</BaseLayout>

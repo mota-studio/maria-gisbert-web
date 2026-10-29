@@ -1,0 +1,202 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export function getStaticPaths() {
+  return ['en', 'fr', 'ca'].map(lang => ({ params: { lang }, props: { lang } }));
+}
+const { lang } = Astro.props;
+const texts = {
+  "en": {
+    "about": "About me",
+    "contact": "Contact",
+    "search": "Search",
+    "recent": "Recent posts",
+    "comments": "Recent comments",
+    "archives": "Archives",
+    "categories": "Categories",
+    "meta": "Meta",
+    "language": "Language",
+    "categoryNames": [
+      "Architecture",
+      "Graphic design",
+      "Infographics",
+      "Furniture"
+    ],
+    "metaItems": [
+      "Log in",
+      "Entries feed",
+      "Comments feed",
+      "WordPress.org"
+    ],
+    "name": "Your name (required)",
+    "email": "Your email (required)",
+    "subject": "Subject",
+    "message": "Your message",
+    "send": "Send",
+    "architect": "Architect",
+    "intro": "María Gisbert – Architect, University of Alicante.",
+    "services": "We offer architectural visualisation, architecture and design services, including graphic and furniture design.",
+    "drawing": "drawing / design",
+    "video": "video editing",
+    "costs": "quantity surveying and estimates",
+    "office": "office software",
+    "months": [
+      "November 2017",
+      "February 2014",
+      "December 2013",
+      "November 2013",
+      "October 2013",
+      "September 2013",
+      "July 2013",
+      "June 2013",
+      "May 2013",
+      "March 2013"
+    ]
+  },
+  "fr": {
+    "about": "À propos",
+    "contact": "Contact",
+    "search": "Rechercher",
+    "recent": "Articles récents",
+    "comments": "Commentaires récents",
+    "archives": "Archives",
+    "categories": "Catégories",
+    "meta": "Méta",
+    "language": "Langue",
+    "categoryNames": [
+      "Architecture",
+      "Design graphique",
+      "Infographies",
+      "Mobilier"
+    ],
+    "metaItems": [
+      "Se connecter",
+      "Flux des articles",
+      "Flux des commentaires",
+      "WordPress.org"
+    ],
+    "name": "Votre nom (obligatoire)",
+    "email": "Votre e-mail (obligatoire)",
+    "subject": "Objet",
+    "message": "Votre message",
+    "send": "Envoyer",
+    "architect": "Architecte",
+    "intro": "María Gisbert – Architecte diplômée de l’Université d’Alicante.",
+    "services": "Nous proposons des services d’infographie architecturale, d’architecture et de design, notamment graphique et de mobilier.",
+    "drawing": "dessin / conception",
+    "video": "montage vidéo",
+    "costs": "métrés et devis",
+    "office": "bureautique",
+    "months": [
+      "novembre 2017",
+      "février 2014",
+      "décembre 2013",
+      "novembre 2013",
+      "octobre 2013",
+      "septembre 2013",
+      "juillet 2013",
+      "juin 2013",
+      "mai 2013",
+      "mars 2013"
+    ]
+  },
+  "ca": {
+    "about": "Sobre mi",
+    "contact": "Contacte",
+    "search": "Cercar",
+    "recent": "Entrades recents",
+    "comments": "Comentaris recents",
+    "archives": "Arxius",
+    "categories": "Categories",
+    "meta": "Meta",
+    "language": "Idioma",
+    "categoryNames": [
+      "Arquitectura",
+      "Disseny gràfic",
+      "Infografies",
+      "Mobiliari"
+    ],
+    "metaItems": [
+      "Accedir",
+      "Canal de les entrades",
+      "Canal dels comentaris",
+      "WordPress.org"
+    ],
+    "name": "El teu nom (obligatori)",
+    "email": "El teu correu electrònic (obligatori)",
+    "subject": "Assumpte",
+    "message": "El teu missatge",
+    "send": "Enviar",
+    "architect": "Arquitecta",
+    "intro": "María Gisbert – Arquitecta per la Universitat d’Alacant.",
+    "services": "Oferim serveis d’infografies, arquitectura i disseny en general, incloent-hi disseny gràfic i de mobiliari.",
+    "drawing": "dibuix / disseny",
+    "video": "edició de vídeo",
+    "costs": "amidaments i pressupostos",
+    "office": "ofimàtica",
+    "months": [
+      "novembre 2017",
+      "febrer 2014",
+      "desembre 2013",
+      "novembre 2013",
+      "octubre 2013",
+      "setembre 2013",
+      "juliol 2013",
+      "juny 2013",
+      "maig 2013",
+      "març 2013"
+    ]
+  }
+};
+const t = texts[lang];
+const months = t.months;
+const pageSlug = 'contacto';
+---
+<BaseLayout title={t.contact}>
+  <main class="about-page contact-page">
+    <article class="about-content contact-content">
+      <h1>{t.contact}</h1>
+      <form class="contact-form">
+        <div class="contact-field"><label for="nombre">{t.name}</label><input type="text" id="nombre" name="nombre" required /></div>
+        <div class="contact-field"><label for="email">{t.email}</label><input type="email" id="email" name="email" required /></div>
+        <div class="contact-field"><label for="asunto">{t.subject}</label><input type="text" id="asunto" name="asunto" /></div>
+        <div class="contact-field"><label for="mensaje">{t.message}</label><textarea id="mensaje" name="mensaje" rows="8"></textarea></div>
+        <button type="submit">{t.send}</button>
+      </form>
+      <div class="contact-info">
+        <p>María Gisbert – {t.architect}</p>
+        <p><a href="mailto:info@mariagisbert.local">info@mariagisbert.local</a></p>
+        <p><a href="tel:+34619942093">Tlf: 619.94.20.93</a></p>
+      </div>
+    </article>
+    <aside class="about-sidebar">
+      <section class="sidebar-section">
+        <form class="sidebar-search" role="search">
+          <input type="search" aria-label={t.search} />
+          <button type="submit">{t.search}</button>
+        </form>
+      </section>
+      <section class="sidebar-section">
+        <h2>{t.recent}</h2>
+        <ul>{['HABITAR COACV 2016','VI PORCELANOSA','I MATIMEX','TRANS-HITOS 2017','DENTALART'].map(name => <li>{name}</li>)}</ul>
+      </section>
+      <section class="sidebar-section"><h2>{t.comments}</h2></section>
+      <section class="sidebar-section">
+        <h2>{t.archives}</h2>
+        <ul>{months.map(month => <li>{month}</li>)}</ul>
+      </section>
+      <section class="sidebar-section">
+        <h2>{t.categories}</h2>
+        <ul>{t.categoryNames.map((name, i) => <li><a href={`/${lang}/${['arquitectura','diseno-grafico','infografias','mobiliario'][i]}/`}>{name}</a></li>)}</ul>
+      </section>
+      <section class="sidebar-section">
+        <h2>{t.meta}</h2>
+        <ul>{t.metaItems.map(name => <li>{name}</li>)}</ul>
+      </section>
+      <section class="sidebar-section">
+        <h2>{t.language}</h2>
+        <ul>{[['es','Español'],['en','English'],['fr','Français'],['ca','Català']].map(([code,name]) => <li><a href={code === 'es' ? `/${pageSlug}/` : `/${code}/${pageSlug}/`}>{name}</a></li>)}</ul>
+      </section>
+    </aside>
+  </main>
+  <footer class="site-footer">© 2012 Grid Theme Responsive Free Wordpress Theme. All Rights Reserved. Design and Developed by Design.net Inspired by FontFabric.com</footer>
+</BaseLayout>

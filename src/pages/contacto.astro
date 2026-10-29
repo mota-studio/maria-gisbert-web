@@ -1,0 +1,162 @@
+
+---
+/* ==========================================
+   MARÍA GISBERT — CONTACTO
+========================================== */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Contacto">
+
+  <main class="about-page contact-page">
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <article class="about-content contact-content">
+
+      <h1>Contacto</h1>
+
+      <form class="contact-form">
+
+        <div class="contact-field">
+          <label for="nombre">Tu nombre (requerido)</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            required
+          />
+        </div>
+
+        <div class="contact-field">
+          <label for="email">Tu Email (requerido)</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+          />
+        </div>
+
+        <div class="contact-field">
+          <label for="asunto">Asunto</label>
+          <input
+            type="text"
+            id="asunto"
+            name="asunto"
+          />
+        </div>
+
+        <div class="contact-field">
+          <label for="mensaje">Tu Mensaje</label>
+          <textarea
+            id="mensaje"
+            name="mensaje"
+            rows="8"
+          ></textarea>
+        </div>
+
+        <button type="submit">Enviar</button>
+
+      </form>
+
+      <!-- INFORMACIÓN DE CONTACTO -->
+      <div class="contact-info">
+        <p>María Gisbert – Arquitecta</p>
+        <p>
+          <a href="mailto:info@mariagisbert.local">
+            info@mariagisbert.local
+          </a>
+        </p>
+        <p>
+          <a href="tel:+34619942093">
+            Tlf: 619.94.20.93
+          </a>
+        </p>
+      </div>
+
+    </article>
+
+    <!-- BARRA LATERAL -->
+    <aside class="about-sidebar">
+
+      <section class="sidebar-section">
+        <form class="sidebar-search" role="search">
+          <input type="search" aria-label="Buscar" />
+          <button type="submit">Buscar</button>
+        </form>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Entradas recientes</h2>
+        <ul>
+          <li>HABITAR COACV 2016</li>
+          <li>VI PORCELANOSA</li>
+          <li>I MATIMEX</li>
+          <li>TRANS-HITOS 2017</li>
+          <li>DENTALART</li>
+        </ul>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Comentarios recientes</h2>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Archivos</h2>
+        <ul>
+          <li>noviembre 2017</li>
+          <li>febrero 2014</li>
+          <li>diciembre 2013</li>
+          <li>noviembre 2013</li>
+          <li>octubre 2013</li>
+          <li>septiembre 2013</li>
+          <li>julio 2013</li>
+          <li>junio 2013</li>
+          <li>mayo 2013</li>
+          <li>marzo 2013</li>
+        </ul>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Categorías</h2>
+        <ul>
+          <li>Arquitectura</li>
+          <li>Diseño Gráfico</li>
+          <li>Infografías</li>
+          <li>Mobiliario</li>
+        </ul>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Meta</h2>
+        <ul>
+          <li>Acceder</li>
+          <li>Feed de entradas</li>
+          <li>Feed de comentarios</li>
+          <li>WordPress.org</li>
+        </ul>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>idioma</h2>
+        <ul>
+          <li>🇪🇸 Español</li>
+          <li>🇬🇧 English</li>
+          <li>🇫🇷 Français</li>
+          <li>🇪🇸 Català</li>
+        </ul>
+      </section>
+
+    </aside>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    © 2012 Grid Theme Responsive Free Wordpress Theme.
+    All Rights Reserved. Design and Developed by
+    Design.net Inspired by FontFabric.com
+  </footer>
+
+</BaseLayout>

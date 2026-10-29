@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export function getStaticPaths() {
+  return ['en', 'fr', 'ca'].map(lang => ({ params: { lang }, props: { lang } }));
+}
+const { lang } = Astro.props;
+const titles = { en: 'Blog', fr: 'Blog', ca: 'Blog' };
+---
+<BaseLayout title={titles[lang]}>
+  <main class="blog-page">
+    <!-- El blog original no contiene publicaciones -->
+  </main>
+  <footer class="site-footer">© 2012 Grid Theme Responsive Free Wordpress Theme. All Rights Reserved. Design and Developed by Design.net Inspired by FontFabric.com</footer>
+</BaseLayout>

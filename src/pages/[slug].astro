@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import proyectos from '../data/proyectos-maria.json';
+
+export function getStaticPaths() {
+  return proyectos
+    .map((proyecto) => {
+      const slug =
+        proyecto.slug ||
+        new URL(proyecto.enlace).pathname
+          .split('/')
+          .filter(Boolean)
+          .pop();
+
+      if (!slug) return null;
+
+      return {
+        params: { slug },
+        props: { proyecto }
+      };
+    })
+    .filter((ruta) => ruta !== null);
+}
+
+const { proyecto } = Astro.props;
+const contenido = proyecto.contenidos?.es ?? '';
+---
+
+<BaseLayout title={proyecto.titulo}>
+  <main class="project-detail">
+    <article class="project-detail__article">
+      <h1>{proyecto.titulo}</h1>
+      <div class="project-detail__content" set:html={contenido} />
+    </article>
+    <aside class="project-detail__sidebar">
+      <h2>Entradas recientes</h2>
+      <ul>
+        {proyectos.slice(0, 5).map((p) => (
+          <li><a href={`/${p.slug}/`}>{p.titulo}</a></li>
+        ))}
+      </ul>
+      <h2>Categorías</h2>
+      <ul>
+        <li><a href="/infografias/">Infografías</a></li>
+        <li><a href="/arquitectura/">Arquitectura</a></li>
+        <li><a href="/diseno-grafico/">Diseño Gráfico</a></li>
+        <li><a href="/mobiliario/">Mobiliario</a></li>
+      </ul>
+    </aside>
+  </main>
+</BaseLayout>
+
+<style>
+  .project-detail { max-width: 1070px; margin: 24px auto 64px; display: grid; grid-template-columns: minmax(0, 1fr) 237px; gap: 50px; }
+  .project-detail__article { min-width: 0; }
+  .project-detail__article h1 { margin: 0 0 12px; font-size: 17px; }
+  .project-detail__content { font-size: 13px; line-height: 1.45; white-space: pre-line; overflow-wrap: anywhere; }
+  .project-detail__content :global(img) { max-width: 100%; height: auto; }
+  .project-detail__content :global(iframe) { max-width: 100%; }
+  .project-detail__sidebar h2 { background: #050505; color: #fff; font-size: 14px; padding: 5px; margin: 0 0 8px; }
+  .project-detail__sidebar ul { list-style: none; padding: 0 4px; margin: 0 0 24px; }
+  .project-detail__sidebar li { margin-bottom: 4px; }
+  .project-detail__sidebar a { color: #777; text-decoration: none; font-size: 12px; }
+  @media (max-width: 700px) { .project-detail { grid-template-columns: 1fr; padding: 0 16px; gap: 28px; } }
+</style>

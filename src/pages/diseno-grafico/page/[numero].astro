@@ -1,0 +1,59 @@
+
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProjectCard from '../../../components/ProjectCard.astro';
+import { disenoGrafico } from '../../../data/categorias.js';
+
+export function getStaticPaths() {
+  const proyectosPorPagina = 8;
+  const totalPaginas = Math.ceil(
+    disenoGrafico.length / proyectosPorPagina
+  );
+
+  return Array.from(
+    { length: Math.max(0, totalPaginas - 1) },
+    (_, i) => {
+      const pagina = i + 2;
+
+      return {
+        params: { numero: String(pagina) },
+        props: { paginaActual: pagina }
+      };
+    }
+  );
+}
+
+const { paginaActual } = Astro.props;
+
+const proyectosPorPagina = 8;
+const totalPaginas = Math.ceil(disenoGrafico.length / proyectosPorPagina);
+
+const inicio = (paginaActual - 1) * proyectosPorPagina;
+const proyectosPagina = disenoGrafico.slice(
+  inicio,
+  inicio + proyectosPorPagina
+);
+---
+
+<BaseLayout title="Diseño Gráfico">
+  <main class="portfolio">
+    <div class="project-grid">
+      {proyectosPagina.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+
+    <nav class="pagination" aria-label="Páginas de diseño gráfico">
+      {Array.from({ length: totalPaginas }, (_, i) => i + 1).map((pagina) => (
+        <a
+          href={pagina === 1
+            ? '/diseno-grafico/'
+            : `/diseno-grafico/page/${pagina}/`}
+          aria-current={pagina === paginaActual ? 'page' : undefined}
+        >
+          {pagina}
+        </a>
+      ))}
+    </nav>
+  </main>
+</BaseLayout>

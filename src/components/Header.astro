@@ -1,0 +1,72 @@
+---
+/* MARÍA GISBERT — HEADER EDITORIAL */
+import { obtenerIdioma, rutaIdioma } from '../i18n/config.js';
+
+const idiomas = [
+  { codigo: 'es', nombre: 'Español' },
+  { codigo: 'en', nombre: 'English' },
+  { codigo: 'fr', nombre: 'Français' },
+  { codigo: 'ca', nombre: 'Català' }
+];
+const idiomaActual = obtenerIdioma(Astro.url.pathname);
+const traducciones = {
+  es: {home:'Inicio',about:'Sobre mí',blog:'Blog',contact:'Contacto',infographics:'Infografías',architecture:'Arquitectura',graphic:'Diseño gráfico',furniture:'Mobiliario',search:'Buscar'},
+  en: {home:'Home',about:'About me',blog:'Blog',contact:'Contact',infographics:'Infographics',architecture:'Architecture',graphic:'Graphic design',furniture:'Furniture',search:'Search'},
+  fr: {home:'Accueil',about:'À propos',blog:'Blog',contact:'Contact',infographics:'Infographies',architecture:'Architecture',graphic:'Design graphique',furniture:'Mobilier',search:'Rechercher'},
+  ca: {home:'Inici',about:'Sobre mi',blog:'Blog',contact:'Contacte',infographics:'Infografies',architecture:'Arquitectura',graphic:'Disseny gràfic',furniture:'Mobiliari',search:'Cercar'}
+};
+const t = traducciones[idiomaActual as keyof typeof traducciones];
+const menu = [
+  { nombre:t.home,href:'/' }, { nombre:t.about,href:'/sobre-mi/' },
+  { nombre:t.blog,href:'/blog/' }, { nombre:t.contact,href:'/contacto/' }
+];
+const categorias = [
+  { nombre:t.infographics,href:'/infografias/' },
+  { nombre:t.architecture,href:'/arquitectura/' },
+  { nombre:t.graphic,href:'/diseno-grafico/' },
+  { nombre:t.furniture,href:'/mobiliario/' }
+];
+function normalizarRuta(ruta: string) { return ruta.replace(/\/+$/, '') || '/'; }
+const rutaActual = normalizarRuta(Astro.url.pathname);
+function estaActiva(href: string) { return rutaActual === normalizarRuta(rutaIdioma(href, idiomaActual)); }
+function enlaceIdioma(codigo: string) { return rutaIdioma(Astro.url.pathname, codigo); }
+function enlaceMenu(href: string) { return rutaIdioma(href, idiomaActual); }
+---
+<header class="site-header">
+  <!-- 01. Logo e idiomas -->
+  <div class="header-top">
+    <a class="logo" href={enlaceMenu('/')} aria-label="Mery, inicio">
+      <img src="/images/logo/logo.png" alt="Mery" class="logo-image" />
+    </a>
+    <nav class="languages" aria-label="Idiomas">
+      {idiomas.map(idioma => (
+        <a href={enlaceIdioma(idioma.codigo)} lang={idioma.codigo} aria-current={idioma.codigo === idiomaActual ? 'page' : undefined}>
+          {idioma.nombre}
+        </a>
+      ))}
+    </nav>
+  </div>
+  <!-- 02. Navegación -->
+  <div class="header-bottom">
+    <nav class="main-nav" aria-label="Navegación principal">
+      {menu.map(item => (
+        <a href={enlaceMenu(item.href)} aria-current={estaActiva(item.href) ? 'page' : undefined}>{item.nombre}</a>
+      ))}
+    </nav>
+    <nav class="category-nav" aria-label="Categorías">
+      {categorias.map(item => (
+        <a href={enlaceMenu(item.href)} aria-current={estaActiva(item.href) ? 'page' : undefined}>{item.nombre}</a>
+      ))}
+    </nav>
+    <!-- 03. Redes y búsqueda -->
+    <div class="header-actions">
+      <div class="social-links">
+        <a href="#" aria-label="Tumblr">t</a>
+        <a href="#" aria-label="Facebook">f</a>
+      </div>
+      <form class="search" role="search">
+        <input type="search" name="s" placeholder={t.search} aria-label={t.search} />
+      </form>
+    </div>
+  </div>
+</header>

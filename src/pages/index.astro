@@ -1,16 +1,34 @@
+
 ---
+/* ==========================================
+   MARÍA GISBERT — HOME ESPAÑOL
+========================================== */
+
+/* 01. IMPORTACIONES */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects } from '../data/projects.js';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<!-- ======================================
+     01. PORTADA
+======================================= -->
+
+<BaseLayout title="Inicio">
+
+  <main class="portfolio">
+
+    <!-- GRID DE PROYECTOS -->
+
+    <div class="project-grid">
+
+      {projects.map((project) => (
+        <ProjectCard project={project} lang="es" />
+      ))}
+
+    </div>
+
+  </main>
+
+</BaseLayout>

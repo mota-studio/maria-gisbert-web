@@ -1,0 +1,47 @@
+
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProjectCard from '../../../components/ProjectCard.astro';
+import { infografias } from '../../../data/categorias.js';
+
+export function getStaticPaths() {
+  return [2, 3, 4].map((pagina) => ({
+    params: { numero: String(pagina) },
+    props: { paginaActual: pagina }
+  }));
+}
+
+const { paginaActual } = Astro.props;
+
+const proyectosPorPagina = 8;
+const totalPaginas = Math.ceil(infografias.length / proyectosPorPagina);
+
+const inicio = (paginaActual - 1) * proyectosPorPagina;
+const proyectosPagina = infografias.slice(
+  inicio,
+  inicio + proyectosPorPagina
+);
+---
+
+<BaseLayout title="Infografías">
+  <main class="portfolio">
+    <div class="project-grid">
+      {proyectosPagina.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+
+    <nav class="pagination" aria-label="Páginas de infografías">
+      {Array.from({ length: totalPaginas }, (_, i) => i + 1).map((pagina) => (
+        <a
+          href={pagina === 1
+            ? '/infografias/'
+            : `/infografias/page/${pagina}/`}
+          aria-current={pagina === paginaActual ? 'page' : undefined}
+        >
+          {pagina}
+        </a>
+      ))}
+    </nav>
+  </main>
+</BaseLayout>

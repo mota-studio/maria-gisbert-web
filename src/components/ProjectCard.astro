@@ -1,0 +1,79 @@
+
+---
+/* ==========================================
+   MARÍA GISBERT — TARJETA DE PROYECTO
+========================================== */
+
+/* 01. TIPOS DE DATOS */
+
+interface Project {
+  title: string;
+  description: string;
+  image: string;
+  slug?: string;
+  categories?: string[];
+  titles?: Partial<Record<Idioma, string>>;
+  descriptions?: Partial<Record<Idioma, string>>;
+}
+
+type Idioma = 'es' | 'en' | 'fr' | 'ca';
+
+interface Props {
+  project: Project;
+  lang?: Idioma;
+}
+
+/* 02. OBTENER PROPIEDADES */
+
+const { project, lang = 'es' } = Astro.props;
+
+/* 03. IMAGEN DEL PROYECTO */
+
+const imageUrl = project.image;
+const title = project.titles?.[lang] || project.title;
+const description = project.descriptions?.[lang] || project.description;
+
+/* 04. ENLACE SEGÚN EL IDIOMA */
+
+const projectUrl = project.slug
+  ? lang === 'es'
+    ? `/${project.slug}/`
+    : `/${lang}/${project.slug}/`
+  : '#';
+---
+
+<!-- ======================================
+     01. TARJETA DEL PROYECTO
+======================================= -->
+
+<a class="project-card" href={projectUrl}>
+
+  <!-- IMAGEN -->
+
+  <img
+    src={imageUrl}
+    alt={title}
+    width="228"
+    height="331"
+    loading="lazy"
+  />
+
+  <!-- HOVER -->
+
+  <div class="project-overlay">
+
+    <h2>{title}</h2>
+
+    <p class="project-description">
+      {description}
+    </p>
+
+    {project.categories && project.categories.length > 0 && (
+      <span class="project-categories">
+        {project.categories.join(' / ')}
+      </span>
+    )}
+
+  </div>
+
+</a>

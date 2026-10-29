@@ -1,0 +1,1109 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
+
+/* ==========================================
+   MARÍA GISBERT — PORTFOLIO
+   HOJA DE ESTILOS GLOBAL
+========================================== */
+
+
+/* ==========================================
+   01. VARIABLES
+========================================== */
+
+:root {
+  --color-background: #ffffff;
+  --color-text: #171717;
+  --color-secondary: #777777;
+  --color-accent: #d94b52;
+  --color-menu: #050505;
+  --color-menu-hover: #888888;
+
+  --font-primary: Verdana, Arial, sans-serif;
+
+  --container-width: 1070px;
+  --grid-gap: 30px;
+}
+
+
+/* ==========================================
+   02. RESET Y ESTILOS GENERALES
+========================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 40px 20px;
+  min-height: 100vh;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-primary);
+  font-size: 12px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 400;
+}
+
+p {
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+
+/* ==========================================
+   03. CONTENEDORES GENERALES
+========================================== */
+
+.site-header,
+.portfolio,
+.about-page,
+.site-footer {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* ==========================================
+   04. HEADER — ESTRUCTURA
+========================================== */
+
+.site-header {
+  margin-bottom: 26px;
+}
+
+.header-top {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 150px;
+  padding-top: 0;
+}
+
+.header-bottom {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+
+/* ==========================================
+   05. HEADER — LOGOTIPO
+========================================== */
+
+.logo {
+  display: block;
+  line-height: 0;
+  transform: translateY(-15px);
+}
+
+.logo-image {
+  display: block;
+  width: 135px;
+  height: auto;
+}
+
+
+/* ==========================================
+   06. HEADER — SELECTOR DE IDIOMAS
+========================================== */
+
+.languages {
+  position: absolute;
+  top: 14px;
+  right: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+}
+
+.languages a {
+  display: list-item;
+  list-style-type: disc;
+  list-style-position: outside;
+  transition: color 0.2s ease;
+}
+
+.languages a:hover {
+  color: var(--color-accent);
+}
+
+
+/* ==========================================
+   07. HEADER — NAVEGACIÓN
+========================================== */
+
+.main-nav,
+.category-nav,
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.main-nav,
+.category-nav {
+  flex-shrink: 0;
+}
+
+
+/* ==========================================
+   08. HEADER — BOTONES
+========================================== */
+
+.main-nav a,
+.category-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 7px;
+  background: var(--color-menu);
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.main-nav a:hover,
+.category-nav a:hover,
+.main-nav a.active,
+.category-nav a.active,
+.main-nav a[aria-current="page"],
+.category-nav a[aria-current="page"] {
+  background: var(--color-menu-hover);
+}
+
+
+/* ==========================================
+   09. HEADER — REDES SOCIALES
+========================================== */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 25px;
+  background: #111111;
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 19px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.social-links a:hover {
+  background: var(--color-menu-hover);
+}
+
+
+/* ==========================================
+   10. HEADER — BUSCADOR
+========================================== */
+
+.search input {
+  width: 170px;
+  max-width: 100%;
+  padding: 6px 8px;
+  background: var(--color-menu);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.search input::placeholder {
+  color: #ffffff;
+}
+
+
+/* ==========================================
+   11. PORTFOLIO — GRID DE PROYECTOS
+========================================== */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  width: 100%;
+}
+
+
+/* ==========================================
+   12. PORTFOLIO — TARJETAS DE PROYECTOS
+========================================== */
+
+/* 12.1 CONTENEDOR */
+
+.project-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 228 / 331;
+  border-radius: 4px;
+}
+
+/* 12.2 IMAGEN */
+
+.project-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 12.3 OVERLAY */
+
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 18px;
+  background: #050505;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  text-align: left;
+}
+
+/* 12.4 MOSTRAR HOVER */
+
+.project-card:hover .project-overlay,
+.project-card:focus-visible .project-overlay {
+  opacity: 1;
+}
+
+/* 12.5 TÍTULO */
+
+.project-overlay h2 {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* 12.6 DESCRIPCIÓN */
+
+.project-description {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.3;
+  white-space: pre-line;
+}
+
+/* 12.7 CATEGORÍAS */
+
+.project-categories {
+  margin-top: auto;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+
+/* ==========================================
+   13. SOBRE MÍ — ESTRUCTURA
+========================================== */
+
+.about-page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 237px;
+  column-gap: 50px;
+  align-items: start;
+}
+
+.about-content {
+  min-width: 0;
+  font-size: 12px;
+}
+
+.about-content h1 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.about-photo {
+  width: 295px;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.about-description {
+  font-size: 12px;
+}
+
+.about-description p {
+  margin-bottom: 5px;
+  line-height: 1.6;
+}
+
+
+/* ==========================================
+   14. SOBRE MÍ — SIDEBAR
+========================================== */
+
+.about-sidebar {
+  width: 100%;
+  font-size: 12px;
+}
+
+.sidebar-section {
+  margin-bottom: 22px;
+}
+
+.sidebar-section h2 {
+  margin: 0 0 8px;
+  padding: 4px 5px;
+  background: var(--color-menu);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.sidebar-section ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 4px;
+}
+
+.sidebar-section li {
+  color: var(--color-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.sidebar-search {
+  display: flex;
+  gap: 5px;
+}
+
+.sidebar-search input {
+  width: 140px;
+  min-width: 0;
+  font-size: 12px;
+}
+
+.sidebar-search button {
+  cursor: pointer;
+  font-size: 12px;
+}
+
+
+/* ==========================================
+   15. BLOG
+========================================== */
+
+.blog-page {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  min-height: 0;
+}
+
+
+/* ==========================================
+   16. CONTACTO — ESTRUCTURA
+========================================== */
+
+.contact-page {
+  min-height: 750px;
+}
+
+.contact-content h1 {
+  margin-bottom: 8px;
+}
+
+
+/* ==========================================
+   17. CONTACTO — FORMULARIO
+========================================== */
+
+.contact-form {
+  width: 100%;
+  max-width: 270px;
+  font-size: 12px;
+}
+
+.contact-field {
+  margin-bottom: 8px;
+}
+
+.contact-field label {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 12px;
+}
+
+.contact-field input {
+  display: block;
+  width: 100%;
+  height: 19px;
+  padding: 2px 4px;
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.contact-field textarea {
+  display: block;
+  width: 95%;
+  height: 140px;
+  padding: 5px;
+  resize: vertical;
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.contact-form button {
+  padding: 2px 4px;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+
+/* ==========================================
+   18. CONTACTO — INFORMACIÓN
+========================================== */
+
+.contact-info {
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.contact-info p {
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
+
+
+/* ==========================================
+   19. PAGINACIÓN DE PROYECTOS
+========================================== */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 35px auto 20px;
+}
+
+.pagination a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 6px 10px;
+  background: #050505;
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 12px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.pagination a:hover,
+.pagination a[aria-current="page"] {
+  background: #888888;
+}
+
+
+/* ==========================================
+   20. FOOTER
+========================================== */
+
+.site-footer {
+  margin-top: 45px;
+  padding: 12px 0;
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  color: #999999;
+  font-size: 11px;
+  text-align: center;
+}
+
+
+/* ==========================================
+   21. ACCESIBILIDAD
+========================================== */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+
+/* ==========================================
+   22. RESPONSIVE — PANTALLAS MEDIANAS
+   Hasta 1100px
+========================================== */
+
+@media (max-width: 1100px) {
+
+  .header-bottom {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .header-actions {
+    margin-left: 0;
+  }
+
+}
+
+
+/* ==========================================
+   23. RESPONSIVE — TABLETS
+   Hasta 900px
+========================================== */
+
+@media (max-width: 900px) {
+
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .languages {
+    right: 20px;
+  }
+
+}
+
+
+/* ==========================================
+   24. RESPONSIVE — TABLETS PEQUEÑAS
+   Hasta 768px
+========================================== */
+
+@media (max-width: 768px) {
+
+  body {
+    padding: 20px 15px;
+  }
+
+  .header-top {
+    min-height: 125px;
+    padding-top: 10px;
+  }
+
+  .logo-image {
+    width: 115px;
+  }
+
+  .languages {
+    top: 10px;
+    right: 0;
+    font-size: 11px;
+  }
+
+  .header-bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .main-nav,
+  .category-nav {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .header-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .about-page {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .about-photo {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .sidebar-search input {
+    flex: 1;
+  }
+
+  .contact-page {
+    min-height: auto;
+  }
+
+  .contact-form {
+    max-width: 100%;
+  }
+
+  .contact-field input {
+    max-width: 350px;
+  }
+
+  .contact-field textarea {
+    max-width: 350px;
+  }
+
+  .contact-info {
+    margin-bottom: 30px;
+  }
+
+  .site-footer {
+    margin-top: 30px;
+    line-height: 1.6;
+  }
+
+}
+
+
+/* ==========================================
+   25. RESPONSIVE — MÓVILES
+   Hasta 600px
+========================================== */
+
+@media (max-width: 600px) {
+
+  .site-header {
+    margin-bottom: 24px;
+  }
+
+  .header-top {
+    min-height: 110px;
+  }
+
+  .logo-image {
+    width: 110px;
+  }
+
+  .languages {
+    top: 5px;
+    right: 0;
+    font-size: 10px;
+  }
+
+  .main-nav,
+  .category-nav {
+    gap: 5px;
+  }
+
+  .main-nav a,
+  .category-nav a {
+    font-size: 11px;
+    padding: 6px;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .search input {
+    width: 150px;
+  }
+
+}
+
+
+/* ==========================================
+   26. ACCESIBILIDAD — MOVIMIENTO REDUCIDO
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+
+}
+
+
+/* ==========================================
+   27. REDISEÑO EDITORIAL MINIMALISTA
+   Ajustes sobre el CSS original funcional.
+========================================== */
+
+:root {
+  --color-background: #FAFAF8;
+  --color-text: #202124;
+  --color-secondary: #858783;
+  --color-accent: #B77D66;
+  --color-menu: #202124;
+  --font-primary: 'Manrope', Arial, sans-serif;
+  --container-width: 1200px;
+  --grid-gap: 22px;
+}
+
+/* 27.1 ESTILOS GENERALES */
+
+body {
+  padding: 24px 24px 40px;
+  font-size: 14px;
+}
+
+/* 27.2 CABECERA */
+
+.site-header {
+  margin-bottom: 28px;
+}
+
+.header-top {
+  min-height: 98px;
+  align-items: center;
+}
+
+.logo {
+  transform: none;
+}
+
+.logo-image {
+  width: 150px;
+}
+
+/* 27.3 IDIOMAS */
+
+.languages {
+  top: 8px;
+  right: 0;
+  flex-direction: row;
+  gap: 15px;
+  font-size: 12px;
+}
+
+.languages a {
+  display: inline-block;
+  list-style: none;
+  color: var(--color-secondary);
+}
+
+.languages a[aria-current='page'] {
+  color: var(--color-text);
+}
+
+/* 27.4 NAVEGACIÓN */
+
+.header-bottom {
+  gap: 20px;
+  padding: 10px 0;
+  border-top: 1px solid #e6e5e1;
+  border-bottom: 1px solid #e6e5e1;
+}
+
+.main-nav,
+.category-nav {
+  gap: 15px;
+}
+
+.category-nav {
+  padding-left: 20px;
+  border-left: 1px solid #d9d8d3;
+}
+
+.main-nav a,
+.category-nav a {
+  padding: 7px 0;
+  background: transparent;
+  color: var(--color-text);
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: color .2s, border-color .2s;
+}
+
+.main-nav a:hover,
+.category-nav a:hover,
+.main-nav a.active,
+.category-nav a.active,
+.main-nav a[aria-current='page'],
+.category-nav a[aria-current='page'] {
+  background: transparent;
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+/* 27.5 REDES SOCIALES Y BUSCADOR */
+
+.header-actions {
+  gap: 10px;
+}
+
+.social-links a {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #deddd8;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 16px;
+}
+
+.social-links a:hover {
+  background: #eeece8;
+}
+
+.search input {
+  width: 105px;
+  padding: 7px 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #d8d7d2;
+  border-radius: 0;
+  color: var(--color-text);
+  font-size: 12px;
+}
+
+.search input::placeholder {
+  color: var(--color-secondary);
+}
+
+/* 27.6 CUADRÍCULA DE PROYECTOS */
+
+.project-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+
+.project-card {
+  aspect-ratio: 228 / 331;
+  border-radius: 8px;
+}
+
+.project-card img {
+  transition: transform .35s ease;
+}
+
+.project-card:hover img {
+  transform: scale(1.025);
+}
+
+/* 27.7 HOVER — DEGRADADO MÁS OSCURO */
+
+.project-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.58) 45%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+  padding: 20px;
+}
+
+.project-overlay h2 {
+  font-size: 16px;
+}
+
+.project-description {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* 27.8 PÁGINAS INTERIORES */
+
+.about-content,
+.about-description,
+.about-sidebar,
+.contact-form,
+.contact-info {
+  font-size: 14px;
+}
+
+.about-content h1,
+.sidebar-section h2 {
+  font-size: 19px;
+}
+
+.sidebar-section h2 {
+  background: transparent;
+  color: var(--color-text);
+  border-bottom: 1px solid #e1dfda;
+  padding: 0 0 8px;
+}
+
+.sidebar-section li,
+.contact-field label {
+  font-size: 13px;
+}
+
+.contact-field input {
+  height: 36px;
+}
+
+.contact-field textarea {
+  width: 100%;
+}
+
+/* 27.9 PAGINACIÓN */
+
+.pagination a {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid #d9d8d3;
+}
+
+.pagination a:hover,
+.pagination a[aria-current='page'] {
+  background: var(--color-text);
+  color: white;
+}
+
+/* 27.10 FOOTER */
+
+.site-footer {
+  margin-top: 48px;
+  border-bottom: none;
+  color: var(--color-secondary);
+}
+
+/* 27.11 RESPONSIVE — 1100px */
+
+@media (max-width: 1100px) {
+  .header-bottom {
+    justify-content: center;
+  }
+
+  .header-actions {
+    margin-left: 0;
+  }
+}
+
+/* 27.12 RESPONSIVE — 900px */
+
+@media (max-width: 900px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .category-nav {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+/* 27.13 RESPONSIVE — 768px */
+
+@media (max-width: 768px) {
+  body {
+    padding: 18px 16px 32px;
+  }
+
+  .header-top {
+    min-height: 90px;
+  }
+
+  .logo-image {
+    width: 130px;
+    height: auto;
+  }
+
+  .languages {
+    top: 0;
+    right: 0;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .header-bottom {
+    gap: 10px;
+  }
+
+  .main-nav,
+  .category-nav {
+    gap: 12px;
+  }
+}
+
+/* 27.14 RESPONSIVE — 600px */
+
+@media (max-width: 600px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    gap: 20px;
+  }
+
+  .header-top {
+    min-height: 90px;
+  }
+
+  .languages {
+    font-size: 10px;
+  }
+
+  .main-nav a,
+  .category-nav a {
+    font-size: 11px;
+    padding: 6px 0;
+  }
+}

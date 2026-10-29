@@ -1,0 +1,35 @@
+
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { disenoGrafico } from '../../data/categorias.js';
+
+const proyectosPorPagina = 8;
+const proyectosPagina = disenoGrafico.slice(0, proyectosPorPagina);
+const totalPaginas = Math.ceil(disenoGrafico.length / proyectosPorPagina);
+---
+
+<BaseLayout title="Diseño Gráfico">
+  <main class="portfolio">
+    <div class="project-grid">
+      {proyectosPagina.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+
+    {totalPaginas > 1 && (
+      <nav class="pagination" aria-label="Páginas de diseño gráfico">
+        {Array.from({ length: totalPaginas }, (_, i) => i + 1).map((pagina) => (
+          <a
+            href={pagina === 1
+              ? '/diseno-grafico/'
+              : `/diseno-grafico/page/${pagina}/`}
+            aria-current={pagina === 1 ? 'page' : undefined}
+          >
+            {pagina}
+          </a>
+        ))}
+      </nav>
+    )}
+  </main>
+</BaseLayout>

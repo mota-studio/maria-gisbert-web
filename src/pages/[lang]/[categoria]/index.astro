@@ -1,0 +1,91 @@
+
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProjectCard from '../../../components/ProjectCard.astro';
+import {
+  infografias,
+  arquitectura,
+  disenoGrafico,
+  mobiliario
+} from '../../../data/categorias.js';
+
+export function getStaticPaths() {
+  const idiomas = ['en', 'fr', 'ca'];
+  const categorias = [
+    'infografias',
+    'arquitectura',
+    'diseno-grafico',
+    'mobiliario'
+  ];
+
+  return idiomas.flatMap((lang) =>
+    categorias.map((categoria) => ({
+      params: { lang, categoria }
+    }))
+  );
+}
+
+const { lang, categoria } = Astro.params;
+
+const categorias = {
+  'infografias': infografias,
+  'arquitectura': arquitectura,
+  'diseno-grafico': disenoGrafico,
+  'mobiliario': mobiliario
+};
+
+const nombres = {
+  en: {
+    'infografias': 'Infographics',
+    'arquitectura': 'Architecture',
+    'diseno-grafico': 'Graphic design',
+    'mobiliario': 'Furniture'
+  },
+  fr: {
+    'infografias': 'Infographies',
+    'arquitectura': 'Architecture',
+    'diseno-grafico': 'Design graphique',
+    'mobiliario': 'Mobilier'
+  },
+  ca: {
+    'infografias': 'Infografies',
+    'arquitectura': 'Arquitectura',
+    'diseno-grafico': 'Disseny gràfic',
+    'mobiliario': 'Mobiliari'
+  }
+};
+
+const idioma = lang as keyof typeof nombres;
+const claveCategoria = categoria as keyof typeof categorias;
+
+const proyectos = categorias[claveCategoria];
+const titulo = nombres[idioma][claveCategoria];
+
+const proyectosPorPagina = 8;
+const totalPaginas = Math.ceil(proyectos.length / proyectosPorPagina);
+const proyectosPagina = proyectos.slice(0, proyectosPorPagina);
+const base = `/${lang}/${categoria}/`;
+---
+
+<BaseLayout title={titulo}>
+  <main class="portfolio">
+    <div class="project-grid">
+      {proyectosPagina.map((project) => (
+        <ProjectCard project={project} lang={idioma} />
+      ))}
+    </div>
+
+    {totalPaginas > 1 && (
+      <nav class="pagination" aria-label={titulo}>
+        {Array.from({ length: totalPaginas }, (_, i) => i + 1).map((pagina) => (
+          <a
+            href={pagina === 1 ? base : `${base}page/${pagina}/`}
+            aria-current={pagina === 1 ? 'page' : undefined}
+          >
+            {pagina}
+          </a>
+        ))}
+      </nav>
+    )}
+  </main>
+</BaseLayout>

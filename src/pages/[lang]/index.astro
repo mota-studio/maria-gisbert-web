@@ -1,0 +1,74 @@
+
+---
+/* ==========================================
+   MARÍA GISBERT — HOME MULTIDIOMA
+========================================== */
+
+/* 01. IMPORTACIONES */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/projects.js';
+import proyectosOriginales from '../../data/proyectos-maria.json';
+
+/* 02. GENERAR RUTAS DE IDIOMAS */
+
+export function getStaticPaths() {
+  return ['en', 'fr', 'ca'].map((lang) => ({
+    params: { lang },
+    props: { lang }
+  }));
+}
+
+/* 03. OBTENER IDIOMA ACTUAL */
+
+const { lang } = Astro.props;
+
+const idioma = lang as 'en' | 'fr' | 'ca';
+
+/* 04. TRADUCIR PROYECTOS */
+
+const proyectosTraducidos = projects.map((project) => {
+
+  const original = proyectosOriginales.find(
+    (p) => p.slug === project.slug
+  );
+
+  return {
+    ...project,
+
+    // Título traducido
+    title:
+      original?.titulos?.[idioma] ||
+      project.title,
+
+    // Descripción traducida para el hover
+    description:
+      original?.descripciones?.[idioma] ||
+      original?.descripcion ||
+      project.description
+  };
+});
+---
+
+<!-- ======================================
+     01. PORTADA
+======================================= -->
+
+<BaseLayout title="Inicio">
+
+  <main class="portfolio">
+
+    <!-- GRID DE PROYECTOS -->
+
+    <div class="project-grid">
+
+      {proyectosTraducidos.map((project) => (
+        <ProjectCard project={project} lang={idioma} />
+      ))}
+
+    </div>
+
+  </main>
+
+</BaseLayout>

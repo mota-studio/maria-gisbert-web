@@ -1,0 +1,225 @@
+
+---
+/* ==========================================
+   MARÍA GISBERT — PROYECTO MULTIDIOMA
+========================================== */
+
+/* 01. IMPORTACIONES */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import proyectos from '../../data/proyectos-maria.json';
+
+/* 02. IDIOMAS DISPONIBLES */
+
+const idiomas = ['en', 'fr', 'ca'] as const;
+type Idioma = (typeof idiomas)[number];
+
+/* 03. GENERAR PÁGINAS DE PROYECTOS */
+
+export function getStaticPaths() {
+
+  const idiomas = ['en', 'fr', 'ca'];
+
+  return idiomas.flatMap((lang) =>
+    proyectos
+      .filter((proyecto) => Boolean(proyecto.slug))
+      .map((proyecto) => ({
+        params: {
+          lang,
+          slug: proyecto.slug
+        },
+        props: {
+          lang,
+          proyecto
+        }
+      }))
+  );
+}
+
+/* 04. OBTENER DATOS DEL PROYECTO */
+
+const { lang, proyecto } = Astro.props;
+const idioma = lang as Idioma;
+
+/* 05. OBTENER TRADUCCIONES */
+
+const titulo =
+  proyecto.titulos?.[idioma] || proyecto.titulo;
+
+const contenido =
+  proyecto.contenidos?.[idioma] ||
+  proyecto.contenidos?.es ||
+  '';
+
+const traducciones = {
+  en: {
+    recent: 'Recent posts',
+    categories: 'Categories',
+    infographics: 'Infographics',
+    architecture: 'Architecture',
+    graphic: 'Graphic Design',
+    furniture: 'Furniture'
+  },
+
+  fr: {
+    recent: 'Articles récents',
+    categories: 'Catégories',
+    infographics: 'Infographies',
+    architecture: 'Architecture',
+    graphic: 'Design graphique',
+    furniture: 'Mobilier'
+  },
+
+  ca: {
+    recent: 'Entrades recents',
+    categories: 'Categories',
+    infographics: 'Infografies',
+    architecture: 'Arquitectura',
+    graphic: 'Disseny gràfic',
+    furniture: 'Mobiliari'
+  }
+};
+
+const t = traducciones[idioma];
+
+/* 06. ENLACES DE LA BARRA LATERAL */
+
+const categorias = [
+  { nombre: t.infographics, href: 'infografias' },
+  { nombre: t.architecture, href: 'arquitectura' },
+  { nombre: t.graphic, href: 'diseno-grafico' },
+  { nombre: t.furniture, href: 'mobiliario' }
+];
+---
+
+<!-- ======================================
+     01. PÁGINA DEL PROYECTO
+======================================= -->
+
+<BaseLayout title={titulo}>
+
+  <main class="project-detail">
+
+    <!-- CONTENIDO PRINCIPAL -->
+
+    <article class="project-detail__article">
+
+      <h1>{titulo}</h1>
+
+      <div
+        class="project-detail__content"
+        set:html={contenido}
+      />
+
+    </article>
+
+    <!-- ====================================
+         02. BARRA LATERAL
+    ===================================== -->
+
+    <aside class="project-detail__sidebar">
+
+      <!-- ENTRADAS RECIENTES -->
+
+      <h2>{t.recent}</h2>
+
+      <ul>
+        {proyectos.slice(0, 5).map((p) => (
+          <li>
+            <a href={`/${idioma}/${p.slug}/`}>
+              {p.titulos?.[idioma] || p.titulo}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- CATEGORÍAS -->
+
+      <h2>{t.categories}</h2>
+
+      <ul>
+        {categorias.map((categoria) => (
+          <li>
+            <a href={`/${idioma}/${categoria.href}/`}>
+              {categoria.nombre}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+    </aside>
+
+  </main>
+
+</BaseLayout>
+
+<!-- ======================================
+     03. ESTILOS
+======================================= -->
+
+<style>
+  .project-detail {
+    max-width: 1070px;
+    margin: 24px auto 64px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 237px;
+    gap: 50px;
+  }
+
+  .project-detail__article {
+    min-width: 0;
+  }
+
+  .project-detail__article h1 {
+    margin: 0 0 12px;
+    font-size: 17px;
+  }
+
+  .project-detail__content {
+    font-size: 13px;
+    line-height: 1.45;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+  }
+
+  .project-detail__content :global(img) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .project-detail__content :global(iframe) {
+    max-width: 100%;
+  }
+
+  .project-detail__sidebar h2 {
+    background: #050505;
+    color: #fff;
+    font-size: 14px;
+    padding: 5px;
+    margin: 0 0 8px;
+  }
+
+  .project-detail__sidebar ul {
+    list-style: none;
+    padding: 0 4px;
+    margin: 0 0 24px;
+  }
+
+  .project-detail__sidebar li {
+    margin-bottom: 4px;
+  }
+
+  .project-detail__sidebar a {
+    color: #777;
+    text-decoration: none;
+    font-size: 12px;
+  }
+
+  @media (max-width: 700px) {
+    .project-detail {
+      grid-template-columns: 1fr;
+      padding: 0 16px;
+      gap: 28px;
+    }
+  }
+</style>

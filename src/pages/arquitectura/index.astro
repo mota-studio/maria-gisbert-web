@@ -1,0 +1,33 @@
+
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { arquitectura } from '../../data/categorias.js';
+
+const proyectosPorPagina = 8;
+const proyectosPagina = arquitectura.slice(0, proyectosPorPagina);
+const totalPaginas = Math.ceil(arquitectura.length / proyectosPorPagina);
+---
+
+<BaseLayout title="Arquitectura">
+  <main class="portfolio">
+    <div class="project-grid">
+      {proyectosPagina.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+
+    <nav class="pagination" aria-label="Páginas de arquitectura">
+      {Array.from({ length: totalPaginas }, (_, i) => i + 1).map((pagina) => (
+        <a
+          href={pagina === 1
+            ? '/arquitectura/'
+            : `/arquitectura/page/${pagina}/`}
+          aria-current={pagina === 1 ? 'page' : undefined}
+        >
+          {pagina}
+        </a>
+      ))}
+    </nav>
+  </main>
+</BaseLayout>
